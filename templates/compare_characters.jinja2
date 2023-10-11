@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <link rel="stylesheet" href="../static/style.css" />
+    <script src="../static/styles.js"></script>
+    <title>Compare Characters</title>
+    {% endblock %}
+</head>
+<body>
+    <div id="content">
+        {% block content %}
+            <h1>Star Wars Character Comparison</h1><br>
+            <table>
+                <thead>
+                    <tr>
+                        {% for key in characters[0].keys() %}
+                            <th>{{ key }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for character in characters %}
+                        <tr>
+                        {% for value in character.values() %}
+                            <td>{{ value }}</td>
+                        {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <img href="{{ images[0] }}">
+            <h2> VS </h2>
+            <Img href="{{ images[1] }}">
+            <h2>The superior Star Wars character is: {{ winner }}!</h2>
+        {% endblock %}
+        <button id="return">Compare again</button>
+    </div>
+    <div id="footer">
+        {% block footer %}
+        {% endblock %}
+    </div>
+</body>
+</html>

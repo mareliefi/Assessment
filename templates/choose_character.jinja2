@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <link rel="stylesheet" href="../static/style.css" />
+    <title>Choose Characters</title>
+    {% endblock %}
+</head>
+<body>
+    <div id="content">
+        {% block content %}
+            <h1>Star Wars Character Comparison</h1><br>
+            {% if error %}
+                <h2 id="error">{{ error }}</h2>
+            {% endif %}
+            <h2>Enter two character names to compare:</h2><br>
+            <form action="" method="post">
+                <label for="character1">Character #1:</label><br>
+                <input type="text" id="character1" name="character1" required><br>
+                <label for="character2">Character #2:</label><br>
+                <input type="text" id="character2" name="character2" required><br>
+                <button type="submit">Submit</button>
+            </form>
+            <div id="comparison">
+            </div>
+        {% endblock %}
+    </div>
+    <div id="footer">
+        {% block footer %}
+        {% endblock %}
+    </div>
+</body>
+</html>
