@@ -3,17 +3,20 @@
 <head>
     {% block head %}
     <link rel="stylesheet" href="../static/style.css" />
+    <link href="https://fonts.cdnfonts.com/css/star-wars" rel="stylesheet" />
+    <link href="https://fonts.cdnfonts.com/css/star-jedi" rel="stylesheet">
     <title>Choose Characters</title>
     {% endblock %}
 </head>
 <body>
     <div id="content">
         {% block content %}
-            <h1>Star Wars Character Comparison</h1><br>
+            <h1 id="main">Star Wars Character Comparison</h1>
             {% if error %}
                 <h2 id="error">{{ error }}</h2>
             {% endif %}
-            <h2>Enter two character names to compare:</h2><br>
+            <h2>Enter two character names to compare:</h2>
+            <h4>Examples: Luke, Leia, Chewbacca</h4>
             <form action="" method="post">
                 <label for="character1">Character #1:</label><br>
                 <input type="text" id="character1" name="character1" required><br>

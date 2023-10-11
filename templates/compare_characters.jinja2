@@ -3,6 +3,8 @@
 <head>
     {% block head %}
     <link rel="stylesheet" href="../static/style.css" />
+    <link href="https://fonts.cdnfonts.com/css/star-wars" rel="stylesheet" />
+    <link href="https://fonts.cdnfonts.com/css/star-jedi" rel="stylesheet">
     <script src="../static/styles.js"></script>
     <title>Compare Characters</title>
     {% endblock %}
@@ -10,31 +12,35 @@
 <body>
     <div id="content">
         {% block content %}
-            <h1>Star Wars Character Comparison</h1><br>
-            <table>
-                <thead>
-                    <tr>
-                        {% for key in characters[0].keys() %}
-                            <th>{{ key }}</th>
-                        {% endfor %}
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for character in characters %}
+            <h1 id="main">Star Wars Character Comparison</h1><br>
+            <div id="images">
+                <img src="../static/images/{{ images[0] }}">
+                <img id="vs" src="../static/images/lightsabers.png">
+                <img src="../static/images/{{ images[1] }}">
+            </div>
+            <div id="table">
+                <table>
+                    <thead>
                         <tr>
-                        {% for value in character.values() %}
-                            <td>{{ value }}</td>
-                        {% endfor %}
+                            {% for key in characters[0].keys() %}
+                                <th>{{ key }}  </th>
+                            {% endfor %}
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            <img href="{{ images[0] }}">
-            <h2> VS </h2>
-            <Img href="{{ images[1] }}">
-            <h2>The superior Star Wars character is: {{ winner }}!</h2>
+                    </thead>
+                    <tbody>
+                        {% for character in characters %}
+                            <tr>
+                            {% for value in character.values() %}
+                                <td>{{ value }}  </td>
+                            {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <h2 id="winner">The superior Star Wars character is: {{ winner }}!</h2>
         {% endblock %}
-        <button id="return">Compare again</button>
+        <a type="button" href="/" id="return">Compare others</a>
     </div>
     <div id="footer">
         {% block footer %}
