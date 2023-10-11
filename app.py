@@ -5,7 +5,8 @@ app = Flask(__name__)
 
 def get_characteristics(character):
     #Get the information for the given character from the SWAPI
-    response = requests.get("https://swapi.dev/api/people/?search={character}".format(character))
+    response = requests.get(f"https://swapi.dev/api/people/?search={character}")
+    print(response.status_code)
     if response.status_code != 200:
         return "Error", None
     else:
@@ -74,9 +75,11 @@ def choose_character():
         character2 = request.form.get("character2")
         character1_data, id1 = get_characteristics(character=character1)
         character2_data, id2 = get_characteristics(character=character2)
+        print(character1_data)
+        print(character2_data)
 
         if character1_data and character2_data:
-            if character1_data or character2_data == "Error":
+            if character1_data == "Error" or character2_data == "Error":
                 return render_template('choose_character.jinja2', error="Oops, SWAPI could not be accessed now, sorry!")
             else:
                 characters.append(character1_data)
@@ -86,7 +89,7 @@ def choose_character():
         elif not character1:
             error = "{} could not be found, please try again.".format(character1)
         else:
-            error = "{} could not be found, please try again.".format(character1)
+            error = "{} could not be found, please try again.".format(character2)
 
     return render_template('choose_character.jinja2', error=error)
 
