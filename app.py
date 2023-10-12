@@ -21,8 +21,8 @@ def get_characteristics(character):
             character_data["Gender"] = filtered_data["gender"].capitalize()
             character_data["Mass"] = filtered_data["mass"]
             character_data["Films"] = len(filtered_data["films"])
-            character_data["Starships Piloted"] = len(filtered_data["starships"])
-            character_data["Vehicles Piloted"] = len(filtered_data["vehicles"])
+            character_data["Starships"] = len(filtered_data["starships"])
+            character_data["Vehicles"] = len(filtered_data["vehicles"])
         else:
             return None, None
 
@@ -75,8 +75,6 @@ def choose_character():
         character2 = request.form.get("character2")
         character1_data, id1 = get_characteristics(character=character1)
         character2_data, id2 = get_characteristics(character=character2)
-        print(character1_data)
-        print(character2_data)
 
         if character1_data and character2_data:
             if character1_data == "Error" or character2_data == "Error":

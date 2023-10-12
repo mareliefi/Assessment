@@ -1,0 +1,124 @@
+table, th, td, tr {
+  border: 1px solid !important;
+  font-family: 'Days One', sans-serif;
+  color: yellow;
+}
+
+h1, h3, h4, p, label {
+  font-family: 'Days One', sans-serif;
+  color: yellow;
+  font-weight: bold;
+  text-align: center;
+}
+
+body {
+  background-image: url("../images/background.jpg");
+  padding: 2em;
+}
+
+ul {
+  color: yellow;
+  font-family: 'Days One', sans-serif;
+  font-size: 1.5em;
+}
+
+img {
+  margin: 0 1em;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.5em;
+  font-family: 'Days One', sans-serif;
+}
+
+input {
+  font-size: 1em;
+  font-family: 'Days One', sans-serif;
+  color: white;
+  text-align: center;
+  border-color: blue;
+  background-color: rgba(0,0,0,.7);
+}
+
+button {
+  padding: .5em 5em;
+  font-size: 1em;
+  font-family: 'Star Wars', sans-serif;
+  margin: 1.5em;
+  background-color: rgba(.4,.4,.4,.4);
+  box-shadow: 5px 5px 5px 5px white;
+  border-color: white;
+  border-radius: .2em;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color:grey;
+  color: black;
+  transition: 0.7s;
+}
+
+a {
+  padding: 1em 4em;
+  font-size: 1.5em;
+  font-family: 'Star Wars', sans-serif;
+  box-shadow: 5px 5px 5px 5px white;
+  color: white !important;
+  border-radius: .2em;
+
+}
+
+a:hover {
+  background-color:grey;
+  color: black !important;
+  transition: 0.7s;
+}
+
+#search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#vs {
+  width: 250px;
+}
+
+#main {
+  font-family: 'Star Wars', sans-serif;
+  color: transparent;
+  -webkit-text-stroke: 1px yellow;
+  -webkit-text-stroke-width: medium;
+  text-align: center;
+  font-size: 4em;
+}
+
+#error {
+  color: red;
+  font-family: sans-serif;
+  padding: 0 0 1em;
+}
+
+.images {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+}
+
+#compare {
+  display: flex;
+  justify-content: center;
+}
+
+.first_list {
+  text-align: left;
+}
+
+.second_list {
+  text-align: right;
+}

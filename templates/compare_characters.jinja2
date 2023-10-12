@@ -2,49 +2,48 @@
 <html lang="en">
 <head>
     {% block head %}
-    <link rel="stylesheet" href="../static/style.css" />
+    <link rel="stylesheet" href="../static/css/style.css" />
     <link href="https://fonts.cdnfonts.com/css/star-wars" rel="stylesheet" />
-    <link href="https://fonts.cdnfonts.com/css/star-jedi" rel="stylesheet">
-    <script src="../static/styles.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Days+One" />
     <title>Compare Characters</title>
     {% endblock %}
 </head>
 <body>
-    <div id="content">
-        {% block content %}
-            <h1 id="main">Star Wars Character Comparison</h1><br>
-            <div id="images">
-                <img src="../static/images/{{ images[0] }}">
-                <img id="vs" src="../static/images/lightsabers.png">
-                <img src="../static/images/{{ images[1] }}">
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <h1 id="main">Star Wars Character Comparison</h1>
             </div>
-            <div id="table">
-                <table>
-                    <thead>
-                        <tr>
-                            {% for key in characters[0].keys() %}
-                                <th>{{ key }}  </th>
-                            {% endfor %}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for character in characters %}
-                            <tr>
-                            {% for value in character.values() %}
-                                <td>{{ value }}  </td>
-                            {% endfor %}
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+        </div>
+        <div class="row">
+            <ul class="col s6 first_list">
+                {% for key, value in characters[0].items() %}
+                    <li><i class="material-icons">movie</i> {{ key }}: {{ value }}</li>
+                {% endfor %}
+            </ul>
+            <ul class="col s6 second_list">
+                {% for key, value in characters[1].items() %}
+                    <li> {{ key }}: {{ value }} <i class="material-icons">movie</i></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="row images">
+            <img class="col s5" src="../static/images/{{ images[0] }}">
+            <img id="vs" class="col s2" src="../static/images/lightsabers.png">
+            <img class="col s5" src="../static/images/{{ images[1] }}">
+        </div>
+        <div class="row">
+            <h3 id="winner">The superior Star Wars character is:<br> {{ winner }}!</h3>
+        </div>
+        <div class="row">
+            <div id="compare" class="col s12">
+                <a type="button" href="/" id="return">Compare others</a>
             </div>
-            <h2 id="winner">The superior Star Wars character is: {{ winner }}!</h2>
-        {% endblock %}
-        <a type="button" href="/" id="return">Compare others</a>
+        </div>
     </div>
-    <div id="footer">
-        {% block footer %}
-        {% endblock %}
-    </div>
+    <script src="../static/js/styles.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>
