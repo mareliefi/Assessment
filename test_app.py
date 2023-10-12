@@ -8,12 +8,14 @@ class testClass(unittest.TestCase):
         response, response_id = get_characteristics("0")
         self.assertEqual(response,None)
         self.assertEqual(response_id,None)
+        print("Test 1 done")
 
         #Test with valid SW character
         response, response_id = get_characteristics("Luke")
         self.assertEqual(response["Name"],"Luke Skywalker")
         self.assertEqual(response["Gender"],"Male")
         self.assertEqual(response_id, "1")
+        print("Test 2 done")
 
 
     def test_extract_character_id(self):
@@ -21,11 +23,13 @@ class testClass(unittest.TestCase):
         url = "https://swapi.dev/api/people/1/"
         response_id = extract_character_id(url)
         self.assertEqual(response_id,"1")
+        print("Test 3 done")
 
         #Test extraction of character id with double digits
         url = "https://swapi.dev/api/people/14/"
         response_id = extract_character_id(url)
         self.assertEqual(response_id,"14")
+        print("Test 4 done")
 
 
     def test_compute_characteristics_score(self):
@@ -35,6 +39,7 @@ class testClass(unittest.TestCase):
         self.assertEqual(response[0]["Score"],67)
         self.assertEqual(response[1]["Score"],21)
         self.assertEqual(response_winner,"Leia")
+        print("Test 5 done")
 
 
     def test_get_images(self):
@@ -44,3 +49,4 @@ class testClass(unittest.TestCase):
         response = get_images(id1, id2)
         self.assertEqual(response[0],"14.jpg")
         self.assertEqual(response[1],"2.jpg")
+        print("Test 6 done")

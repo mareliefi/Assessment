@@ -6,7 +6,6 @@ app = Flask(__name__)
 def get_characteristics(character):
     #Get the information for the given character from the SWAPI
     response = requests.get(f"https://swapi.dev/api/people/?search={character}")
-    print(response.status_code)
     if response.status_code != 200:
         return "Error", None
     else:

@@ -26,6 +26,10 @@ img {
   margin: 0 1em;
 }
 
+img:hover {
+  opacity: .8;
+}
+
 form {
   display: flex;
   flex-direction: column;
