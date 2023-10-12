@@ -8,3 +8,4 @@ How to run:
 3. Activate virtual environment.
 4. Install the requirements in requirements.txt.
 5. Run flask.
+6. Open on hosting server.
