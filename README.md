@@ -1,5 +1,5 @@
 # Assessment
-App for comparing Star Wars characters. 
+App for comparing Star Wars characters. This app was tested on Python 3.10.0 on Linux, Ubuntu OS.
 
 How to run app:
 
