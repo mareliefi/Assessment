@@ -13,4 +13,4 @@ How to run app:
 How to run tests:
 
 1. Run in root directory:
-   python -m unittest
+   `python -m unittest`
