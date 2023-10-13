@@ -1,16 +1,16 @@
-import requests
+import os, requests
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
 def get_characteristics(character):
-    #Get the information for the given character from the SWAPI
+    # Get the information for the given character from the SWAPI
     response = requests.get(f"https://swapi.dev/api/people/?search={character}")
     if response.status_code != 200:
         return "Error", None
     else:
         data = response.json()
-        if data["results"]:
+        if data.get("results"):
             filtered_data = data["results"][0]
             character_id = extract_character_id(filtered_data["url"])
             character_data = {}
@@ -29,7 +29,7 @@ def get_characteristics(character):
 
 
 def extract_character_id(url):
-    #Extract the character id from the character url
+    # Extract the character id from the character url
     if url[-3].isnumeric():
         id = url[-3:-1]
     else:
@@ -38,7 +38,7 @@ def extract_character_id(url):
 
 
 def compute_characteristics_score(characters):
-    #Compute the score for each character and return the winner
+    # Compute the score for each character and return the winner
     for character in characters:
         score = 0
         for value in character.values():
@@ -56,11 +56,18 @@ def compute_characteristics_score(characters):
     return characters, winner
 
 
-def get_images(id1, id2):
-    #Generate the image url with the character id's in string format
+def get_images(id_1, id_2):
+    # Generate the image url with the character id's in string format
     images = []
-    images.append(id1 + ".jpg")
-    images.append(id2 + ".jpg")
+    if os.path.exists(f"static/images/{id_1}.jpg"):
+        images.append(f"{id_1}.jpg")
+    else:
+        images.append("image_not_found.jpg")
+    if os.path.exists(f"static/images/{id_2}.jpg"):
+        images.append(f"{id_2}.jpg")
+    else:
+        images.append("image_not_found.jpg")
+
     return images
 
 
@@ -72,8 +79,8 @@ def choose_character():
     if request.method == "POST":
         character1 = request.form.get("character1")
         character2 = request.form.get("character2")
-        character1_data, id1 = get_characteristics(character=character1)
-        character2_data, id2 = get_characteristics(character=character2)
+        character1_data, id_1 = get_characteristics(character=character1)
+        character2_data, id_2 = get_characteristics(character=character2)
 
         if character1_data and character2_data:
             if character1_data == "Error" or character2_data == "Error":
@@ -82,7 +89,7 @@ def choose_character():
                 characters.append(character1_data)
                 characters.append(character2_data)
                 characters_scored, winner = compute_characteristics_score(characters)
-                return show_comparison(characters_scored, winner, id1, id2)
+                return show_comparison(characters_scored, winner, id_1, id_2)
         elif not character1:
             error = "{} could not be found, please try again.".format(character1)
         else:
@@ -91,6 +98,6 @@ def choose_character():
     return render_template('choose_character.jinja2', error=error)
 
 @app.route("/compare")
-def show_comparison(characters_scored, winner, id1, id2):
-    images = get_images(id1, id2)
+def show_comparison(characters_scored, winner, id_1, id_2):
+    images = get_images(id_1, id_2)
     return render_template('compare_characters.jinja2', characters=characters_scored, winner=winner, images=images)
