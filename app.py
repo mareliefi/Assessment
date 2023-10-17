@@ -91,7 +91,7 @@ def choose_character():
             characters_scored, winner = compute_characteristics_score(characters)
             return show_comparison(characters_scored, winner, id_1, id_2)
 
-        if not character1:
+        if not character1_data:
             error = f"{character1} could not be found, please try again."
         else:
             error = f"{character2} could not be found, please try again."

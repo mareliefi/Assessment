@@ -4,13 +4,13 @@ from app import get_characteristics, extract_character_id, compute_characteristi
 
 class testClass(unittest.TestCase):
     def test_get_characteristics(self):
-        #Test with non existing SW character
+        # Test with non existing SW character
         response, response_id = get_characteristics("0")
         self.assertEqual(response,None)
         self.assertEqual(response_id,None)
         print("Test 1 done")
 
-        #Test with valid SW character
+        # Test with valid SW character
         response, response_id = get_characteristics("Luke")
         self.assertEqual(response["Name"],"Luke Skywalker")
         self.assertEqual(response["Gender"],"Male")
@@ -19,13 +19,13 @@ class testClass(unittest.TestCase):
 
 
     def test_extract_character_id(self):
-        #Test extraction of character id with single digit
+        # Test extraction of character id with single digit
         url = "https://swapi.dev/api/people/1/"
         response_id = extract_character_id(url)
         self.assertEqual(response_id,"1")
         print("Test 3 done")
 
-        #Test extraction of character id with double digits
+        # Test extraction of character id with double digits
         url = "https://swapi.dev/api/people/14/"
         response_id = extract_character_id(url)
         self.assertEqual(response_id,"14")
@@ -33,7 +33,7 @@ class testClass(unittest.TestCase):
 
 
     def test_compute_characteristics_score(self):
-        #Test that scores are tallied correctly and that correct character wins
+        # Test that scores are tallied correctly and that correct character wins
         characters = [{"Name":"Leia","Height":"65","Films":2},{"Name":"Yoda","Height":"14","Films":7}]
         response, response_winner = compute_characteristics_score(characters)
         self.assertEqual(response[0]["Score"],67)
@@ -43,7 +43,7 @@ class testClass(unittest.TestCase):
 
 
     def test_get_images(self):
-        #Test that image urls are generated correctly
+        # Test that image urls are generated correctly
         id1 = "14"
         id2 = "2"
         response = get_images(id1, id2)
