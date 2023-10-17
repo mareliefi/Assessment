@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 def get_characteristics(character):
     # Get the information for the given character from the SWAPI
-    response = requests.get(f"https://swapi.dev/api/people/?search={character}")
+    response = requests.get(f"https://swapi.dev/api/people/?search={character}", timeout=15)
     if response.status_code != 200:
         return "Error", None
     else:
@@ -42,9 +42,9 @@ def compute_characteristics_score(characters):
     for character in characters:
         score = 0
         for value in character.values():
-            if type(value) == int:
+            if isinstance(value, int):
                 score += value
-            elif type(value) == str and value.isnumeric():
+            elif isinstance(value, str) and value.isnumeric():
                 score += int(value)
         character["Score"] = score
 
@@ -84,20 +84,22 @@ def choose_character():
 
         if character1_data and character2_data:
             if character1_data == "Error" or character2_data == "Error":
-                return render_template('choose_character.jinja2', error="Oops, SWAPI could not be accessed now, sorry!")
-            else:
-                characters.append(character1_data)
-                characters.append(character2_data)
-                characters_scored, winner = compute_characteristics_score(characters)
-                return show_comparison(characters_scored, winner, id_1, id_2)
-        elif not character1:
-            error = "{} could not be found, please try again.".format(character1)
+                return render_template('choose_character.jinja2',
+                                       error="Oops, SWAPI could not be accessed now, sorry!")
+            characters.append(character1_data)
+            characters.append(character2_data)
+            characters_scored, winner = compute_characteristics_score(characters)
+            return show_comparison(characters_scored, winner, id_1, id_2)
+
+        if not character1:
+            error = f"{character1} could not be found, please try again."
         else:
-            error = "{} could not be found, please try again.".format(character2)
+            error = f"{character2} could not be found, please try again."
 
     return render_template('choose_character.jinja2', error=error)
 
 @app.route("/compare")
 def show_comparison(characters_scored, winner, id_1, id_2):
     images = get_images(id_1, id_2)
-    return render_template('compare_characters.jinja2', characters=characters_scored, winner=winner, images=images)
+    return render_template('compare_characters.jinja2',
+                           characters=characters_scored, winner=winner, images=images)
